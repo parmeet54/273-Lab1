@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
+var db = require('./config/db.config');
+const router = express.Router();
+
 app.set('view engine', 'ejs');
 
 //use cors to allow cross origin resource sharing
