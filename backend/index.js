@@ -73,13 +73,13 @@ app.use("/api/v1/users", userRoutes);
 
 
 // Login function
-app.post('/api/v1/login', async function(req,res){
+app.post('/api/v1/login', async (req,res) => {
     const email = req.body.email;
     const password = req.body.password;
 
     db.query("SELECT * FROM user WHERE email = ?",
     [email],
-    async function(err, result){
+    async (err, result) => {
         if(err){
             res.send({err:err});
         }
@@ -87,7 +87,7 @@ app.post('/api/v1/login', async function(req,res){
 
             const comparison = await bcrypt.compare(password, result[0].password)
             if(comparison){
-                res.session.user = email;
+                //res.session.user = result[0];
                 res.send(result);
                 console.log("Login Success");
             }

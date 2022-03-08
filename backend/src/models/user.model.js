@@ -1,5 +1,6 @@
 const db = require('../../config/db.config');
 
+// Encryption
 const bcrypt = require('bcrypt');
 const salt = 10;
 
@@ -23,7 +24,7 @@ User.getAllUsers = (result) =>{
 }
 
 // Create user = Sign Up
-User.createUser = async function(userReqData, result){
+User.createUser = async (userReqData, result) => {
 
     userReqData.password = await bcrypt.hash(userReqData.password, salt);
     db.query('INSERT INTO user SET ?', userReqData, (err, res) => {
