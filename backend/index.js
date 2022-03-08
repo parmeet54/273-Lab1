@@ -7,6 +7,10 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var db = require('./config/db.config');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
+//Importing routes
+const userRoutes = require('./src/routes/user.route');
 
 app.set('view engine', 'ejs');
 
@@ -15,7 +19,7 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 //use express session to maintain session data
 app.use(session({
-    secret              : 'cmpe273_kafka_passport_mongo',
+    secret              : 'cmpe273_lab1',
     resave              : false, // Forces the session to be saved back to the session store, even if the session was never modified during the request
     saveUninitialized   : false, // Force to save uninitialized session to db. A session is uninitialized when it is new but not modified.
     duration            : 60 * 60 * 1000,    // Overall duration of Session : 30 minutes : 1800 seconds
@@ -27,6 +31,7 @@ app.use(bodyParser.urlencoded({
   }));
 app.use(bodyParser.json());
 
+
 //Allow Access Control
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -37,11 +42,8 @@ app.use(function(req, res, next) {
     next();
   });
 
-  var Users = [{
-      username : "admin",
-      password : "admin"
-  }]
-
+  
+/**
 //Route to handle Post Request Call
 app.post('/login',function(req,res){
     
@@ -64,8 +66,45 @@ app.post('/login',function(req,res){
         }
     })
 });
+*/
+
+// Getting routes
+app.use("/api/v1/users", userRoutes);
 
 
+// Login function
+app.post('/api/v1/login', async function(req,res){
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.query("SELECT * FROM user WHERE email = ?",
+    [email],
+    async function(err, result){
+        if(err){
+            res.send({err:err});
+        }
+        if(result.length > 0){
+
+            const comparison = await bcrypt.compare(password, result[0].password)
+            if(comparison){
+                res.session.user = email;
+                res.send(result);
+                console.log("Login Success");
+            }
+            else{
+                res.send("Wrong Password");
+                console.log("Login Failed, Wrong Password");
+            }
+        }
+        else{
+            console.log("User does not exist");
+            res.send("Incorrect username/password comnbination");
+        }
+    })
+})
+
+
+// User logout function
 app.get('/logout', (req,res) => {
     if(!req.session.user){
         console.log("\nNot logged in");
