@@ -11,8 +11,11 @@ router.get('/', userController.getAllUsers);
 router.post('/', userController.createUser);
 
 // Get a user        GET
-
+router.get('/:email', userController.getUserByEmail);
 
 // Update a user     PUT
+router.put('/:email', userController.updateProfile);
+
+
 
 module.exports = router;
