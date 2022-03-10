@@ -1,23 +1,21 @@
 import React , {Component} from 'react';
 import axios from 'axios';
-import {Navigate} from 'react-router';
+import {Redirect} from 'react-router';
 
-class Signup extends Component {
+class Login extends Component {
 
     constructor(props){
         super(props);
         this.state = {
             email: "",
             password: "",
-            name: "",
             auth:false,
             message: ""
         }
 
         this.emailChangeHandler = this.emailChangeHandler.bind(this);
         this.passwordChangeHander = this.passwordChangeHander.bind(this);
-        this.nameChangeHandler = this.nameChangeHandler.bind(this);
-        this.submitSignup = this.submitSignup.bind(this);
+        this.submitLogin = this.submitLogin.bind(this);
     }
 
     emailChangeHandler = (e) => {
@@ -31,24 +29,13 @@ class Signup extends Component {
         });
     }
 
-    nameChangeHandler = (e) => {
-        this.setState({
-            name: e.target.value
-        })
-    }
-
-    submitSignup = (e) => {
-
-        //prevent page from refresh
-        e.preventDefault();
-
+    submitLogin = (e) => {
         const data = {
             email: this.state.email,
             password: this.state.password,
-            name: this.state.name
         }
         
-        axios.post("http://localhost:3001/api/v1/users", data)
+        axios.post("localhost:3001/api/v1/login", data)
             .then(response => {
                 console.log("Status code" , response.status);
 
@@ -66,28 +53,19 @@ class Signup extends Component {
     }
 
     render(){
-        let redirectVar = null;
-        if(this.state.auth === true){
-           redirectVar = <Navigate to= "/"/>
-        }
         return(
             <div>
-                {redirectVar}
-                <h2>Sign Up Here</h2>
+                <h2>Login Here</h2>
                 <div>
                     <input onChange={this.emailChangeHandler} type='email' name="email" placeholder='email'></input>
                 </div>
                 <div>
                     <input onChange={this.passwordChangeHander} type='password' name="password" placeholder='password'></input>
                 </div>
-                <div>
-                    <input onChange={this.nameChangeHandler} type='text' name="name" placeholder='name'></input>
-                </div>
-
-                <button onClick={this.submitSignup}>Sign Up</button>
+                <button onClick={this.submitLogin}>Login</button>
             </div>
         );
     }
 }
 
-export default Signup;
+export default Login;
