@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router';
+import {Navigate} from 'react-router';
 
 class Login extends Component {
 
@@ -35,11 +35,13 @@ class Login extends Component {
             password: this.state.password,
         }
         
-        axios.post("localhost:3001/api/v1/login", data)
+        axios.post("http://localhost:3001/api/v1/login", data)
             .then(response => {
                 console.log("Status code" , response.status);
 
                 if(response.status === 200){
+
+                    localStorage.setItem("token", data.email);
                     this.setState({
                         auth: true
                     })
@@ -53,8 +55,13 @@ class Login extends Component {
     }
 
     render(){
+        let redirectVar = null;
+        if(this.state.auth === true){
+           redirectVar = <Navigate to= "/"/>
+        }
         return(
             <div>
+                {redirectVar}
                 <h2>Login Here</h2>
                 <div>
                     <input onChange={this.emailChangeHandler} type='email' name="email" placeholder='email'></input>

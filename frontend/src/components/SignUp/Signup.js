@@ -10,7 +10,7 @@ class Signup extends Component {
             email: "",
             password: "",
             name: "",
-            auth:false,
+            created:false,
             message: ""
         }
 
@@ -54,7 +54,7 @@ class Signup extends Component {
 
                 if(response.status === 200){
                     this.setState({
-                        auth: true
+                        created: true
                     })
                 }
                 else{
@@ -67,8 +67,8 @@ class Signup extends Component {
 
     render(){
         let redirectVar = null;
-        if(this.state.auth === true){
-           redirectVar = <Navigate to= "/"/>
+        if(this.state.created === true){
+           redirectVar = <Navigate to= "/login"/>
         }
         return(
             <div>
