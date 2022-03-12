@@ -5,9 +5,16 @@ const bcrypt = require('bcrypt');
 const salt = 10;
 
 var User = function(user){
+    this.username = user.username;
     this.email = user.email;
     this.name = user.name;
     this.password = user.password;
+    this.about = user.about;
+    this.city = user.city;
+    this.dob = user.dob;
+    this.address = user.address;
+    this.country = user.country;
+    this.phone_no = user.phone_no;
 }
 
 
@@ -39,10 +46,10 @@ User.createUser = async (userReqData, result) => {
 }
 
 
-// Get User by Email
-User.getUserByEmail = (email, result) => {
+// Get User by username
+User.getUserByUsername = (username, result) => {
 
-    db.query('SELECT * FROM user WHERE email = ?', email , (err,res) => {
+    db.query('SELECT * FROM user WHERE username = ?', username , (err,res) => {
         if(err){
             console.log("Error while fetching user data", err);
             result(null, err);
@@ -56,11 +63,10 @@ User.getUserByEmail = (email, result) => {
 
 
 // Update Profile
-User.updateProfile = async(email, userReqData, result) => {
+User.updateProfile = async(username, userReqData, result) => {
 
-    const encryptedPass = await bcrypt.hash(userReqData.password , salt)
-    db.query('UPDATE user SET password=?, name=? WHERE email=?' , 
-    [encryptedPass , userReqData.name, email], 
+    db.query('UPDATE user SET email=?, name=?, about=?, city=?, dob=?, address=?, country=?, phone_no=? WHERE username=?' , 
+    [userReqData.email, userReqData.name, userReqData.about, userReqData.city, userReqData.dob, userReqData.address, userReqData.country, userReqData.phone_no, username], 
     (err, res) => {
         if(err){
             console.log(err);

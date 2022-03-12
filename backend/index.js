@@ -75,11 +75,11 @@ app.use("/api/v1/users", userRoutes);
 
 // Login function
 app.post('/api/v1/login', async (req,res) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
 
-    db.query("SELECT * FROM user WHERE email = ?",
-    [email],
+    db.query("SELECT * FROM user WHERE username = ?",
+    [username],
     async (err, result) => {
         if(err){
             res.send({err:err});

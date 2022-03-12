@@ -7,6 +7,7 @@ class Signup extends Component {
     constructor(props){
         super(props);
         this.state = {
+            username: "",
             email: "",
             password: "",
             name: "",
@@ -14,12 +15,18 @@ class Signup extends Component {
             message: ""
         }
 
+        this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
         this.emailChangeHandler = this.emailChangeHandler.bind(this);
         this.passwordChangeHander = this.passwordChangeHander.bind(this);
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
         this.submitSignup = this.submitSignup.bind(this);
     }
 
+    usernameChangeHandler = (e) => {
+        this.setState({
+            username: e.target.value
+        });
+    }
     emailChangeHandler = (e) => {
         this.setState({
             email: e.target.value
@@ -43,6 +50,7 @@ class Signup extends Component {
         e.preventDefault();
 
         const data = {
+            username: this.state.username,
             email: this.state.email,
             password: this.state.password,
             name: this.state.name
@@ -75,7 +83,10 @@ class Signup extends Component {
                 {redirectVar}
                 <h2>Sign Up Here</h2>
                 <div>
-                    <input onChange={this.emailChangeHandler} type='email' name="email" placeholder='email'></input>
+                    <input onChange={this.usernameChangeHandler} type='text' name="username" placeholder='username'></input>
+                </div>
+                <div>
+                    <input onChange={this.emailChangeHandler} type='text' name="email" placeholder='email'></input>
                 </div>
                 <div>
                     <input onChange={this.passwordChangeHander} type='password' name="password" placeholder='password'></input>

@@ -37,11 +37,11 @@ exports.createUser = (req,res) => {
 
 
 
-// Get User by Email
-exports.getUserByEmail = (req, res) => {
+// Get User by username
+exports.getUserByUsername = (req, res) => {
     console.log("Inside Controller: Get Profile");
 
-    userModel.getUserByEmail(req.params.email ,(err, result) => {
+    userModel.getUserByUsername(req.params.username ,(err, result) => {
         if(err){
             console.log(err);
             res.send(err);
@@ -64,7 +64,7 @@ exports.updateProfile = (req, res) => {
     console.log("Inside User Controller: Update Profile");
 
     const userReqData = new userModel(req.body);
-    userModel.updateProfile(req.params.email, userReqData , (err, result) => {
+    userModel.updateProfile(req.params.username, userReqData , (err, result) => {
         if(err){
             console.log(err);
             res.send(err);

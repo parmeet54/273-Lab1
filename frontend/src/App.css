@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+input[type="search bar"] {
+  width: 500px;
+}
+
+.logo-center {
+  vertical-align: middle;
+}
+
+.about-input {
+  height: 100px;
+  width: 200px;
+}

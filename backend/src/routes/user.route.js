@@ -11,10 +11,10 @@ router.get('/', userController.getAllUsers);
 router.post('/', userController.createUser);
 
 // Get a user        GET
-router.get('/:email', userController.getUserByEmail);
+router.get('/:username', userController.getUserByUsername);
 
 // Update a user     PUT
-router.put('/:email', userController.updateProfile);
+router.put('/:username', userController.updateProfile);
 
 
 

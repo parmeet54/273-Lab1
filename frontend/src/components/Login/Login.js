@@ -7,20 +7,20 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: "",
             auth:false,
             message: ""
         }
 
-        this.emailChangeHandler = this.emailChangeHandler.bind(this);
+        this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
         this.passwordChangeHander = this.passwordChangeHander.bind(this);
         this.submitLogin = this.submitLogin.bind(this);
     }
 
-    emailChangeHandler = (e) => {
+    usernameChangeHandler = (e) => {
         this.setState({
-            email: e.target.value
+            username: e.target.value
         });
     }
     passwordChangeHander = (e) => {
@@ -31,7 +31,7 @@ class Login extends Component {
 
     submitLogin = (e) => {
         const data = {
-            email: this.state.email,
+            username: this.state.username,
             password: this.state.password,
         }
         
@@ -40,8 +40,8 @@ class Login extends Component {
                 console.log("Status code" , response.status);
 
                 if(response.status === 200){
+                    sessionStorage.setItem("token", data.username);
 
-                    localStorage.setItem("token", data.email);
                     this.setState({
                         auth: true
                     })
@@ -64,7 +64,7 @@ class Login extends Component {
                 {redirectVar}
                 <h2>Login Here</h2>
                 <div>
-                    <input onChange={this.emailChangeHandler} type='email' name="email" placeholder='email'></input>
+                    <input onChange={this.usernameChangeHandler} type='text' name="username" placeholder='username'></input>
                 </div>
                 <div>
                     <input onChange={this.passwordChangeHander} type='password' name="password" placeholder='password'></input>
