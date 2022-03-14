@@ -11,6 +11,8 @@ const bcrypt = require('bcrypt');
 
 //Importing routes
 const userRoutes = require('./src/routes/user.route');
+const shopRoutes = require('./src/routes/shop.route');
+const itemRoutes = require('./src/routes/item.route');
 
 app.set('view engine', 'ejs');
 
@@ -70,8 +72,15 @@ app.post('/login',function(req,res){
 */
 
 // Getting routes
+
+// User Routes
 app.use("/api/v1/users", userRoutes);
 
+// Shop Routes
+app.use("/api/v1/shops", shopRoutes);
+
+// Item Routes
+app.use("/api/v1/items", itemRoutes);
 
 // Login function
 app.post('/api/v1/login', async (req,res) => {
