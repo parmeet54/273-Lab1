@@ -1,11 +1,15 @@
 import React , {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import ShopPopup from '../Shop/ShopPopup';
+import { Navigate } from 'react-router';
 
 const Profile = () => {
     const[username, setUsername] = useState("");
-    const[name, setName] = useState("TEST");
+    const[name, setName] = useState("");
     const[email, setEmail] = useState("");
+    const[seen, setSeen] = useState(false);
     const[user, setUser] = useState({});
 
 
@@ -19,7 +23,7 @@ const Profile = () => {
             console.log(response.data[0]);
         });
         console.log("Username:", username);
-    });
+    },[]);
 
     const handleSearchChange = (e) => {
 
@@ -29,22 +33,34 @@ const Profile = () => {
 
     }
 
+    // const handlePopup = () => {
+    //     setSeen(!seen);
+    // }
+
     return(
-        <div className='App'>
-            <br/>User Profile here, Hello <b>{name}</b>
+        <><div className='App'>
+            {/* {seen ? <ShopPopup name="TESTING" toggle={handlePopup} /> : null} */}
 
-            <br/>My Email is <b>{email}</b>
+            <br />User Profile here, Hello <b>{name}</b>
 
-            <br/>My Username is <b>{username}</b>
+            <br />My Email is <b>{email}</b>
 
-            <br/>
-            <br/><Link to="/updateProfile" className="btn btn-primary">Update Profile</Link>  
-            
-            <input onChange={handleSearchChange} type='text' name="search" placeholder='Search Favorites' style={{marginLeft:200}}></input>
+            <br />My Username is <b>{username}</b>
+
+            <br />
+            <br /><Link to="/updateProfile" className="btn btn-primary">Update Profile</Link>
+
+            <input onChange={handleSearchChange} type='text' name="search" placeholder='Search Favorites' style={{ marginLeft: 200 }}></input>
             <button onClick={handleSearchSubmit}>Search</button>
-
+            <div className='App'>
+                <br/>
+                <br/>
+                <br/>
+                <Link to="/createshop" className="btn btn-primary">Create Shop</Link>
+            </div>
 
         </div>
+       </>
     )
 }
 

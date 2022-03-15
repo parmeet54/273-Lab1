@@ -5,6 +5,7 @@ var Shop = function(shop){
     this.username = shop.username;
     this.total_sales = shop.total_sales;
     this.name = shop.name;
+    this.image = shop.image;
 }
 
 
@@ -61,7 +62,7 @@ Shop.getShopByUser = (username, result) => {
         }
         else{
             console.log("Shop Fetched");
-            console.log(result);
+            //console.log(result);
             result(null , res);
         }
     })
@@ -72,8 +73,8 @@ Shop.getShopByUser = (username, result) => {
 // Update Shop
 Shop.updateShop = async(shop_ID, shopReqData, result) => {
 
-    db.query('UPDATE shop SET name=?, total_sales=? WHERE shop_ID=?' , 
-    [shopReqData.name, shopReqData.total_sales, shop_ID], 
+    db.query('UPDATE shop SET name=?, total_sales=?, image=? WHERE shop_ID=?' , 
+    [shopReqData.name, shopReqData.total_sales, shopReqData.image, shop_ID], 
     (err, res) => {
         if(err){
             console.log(err);
@@ -103,5 +104,9 @@ Shop.updateShopSales = (shop_ID, shopReqData, result) => {
         }
     })
 }
+
+
+// UPDATE IMAGE
+
 
 module.exports = Shop;

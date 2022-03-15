@@ -15,6 +15,7 @@ var User = function(user){
     this.address = user.address;
     this.country = user.country;
     this.phone_no = user.phone_no;
+    this.image = user.image;
 }
 
 
@@ -65,8 +66,8 @@ User.getUserByUsername = (username, result) => {
 // Update Profile
 User.updateProfile = async(username, userReqData, result) => {
 
-    db.query('UPDATE user SET email=?, name=?, about=?, city=?, dob=?, address=?, country=?, phone_no=? WHERE username=?' , 
-    [userReqData.email, userReqData.name, userReqData.about, userReqData.city, userReqData.dob, userReqData.address, userReqData.country, userReqData.phone_no, username], 
+    db.query('UPDATE user SET email=?, name=?, about=?, city=?, dob=?, address=?, country=?, phone_no=?, image=? WHERE username=?' , 
+    [userReqData.email, userReqData.name, userReqData.about, userReqData.city, userReqData.dob, userReqData.address, userReqData.country, userReqData.phone_no, userReqData.image, username], 
     (err, res) => {
         if(err){
             console.log(err);
@@ -79,5 +80,10 @@ User.updateProfile = async(username, userReqData, result) => {
         }
     })
 }
+
+
+
+// UPDATE IMAGE
+
 
 module.exports = User;

@@ -19,13 +19,9 @@ const UpdateProfile = () => {
     // useEffect(() => {
     //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
     //     .then((response) => {
-    //         //setUser(response.data[0]);
-    //         setUsername(response.data[0].username);
-    //         setName(response.data[0].name);
-    //         setEmail(response.data[0].email);
-    //         //console.log(response.data[0]);
+    //         setUser(response.data[0]);
+    //         console.log("user fetched")
     //     });
-    //     console.log("Username:", username);
     // });
 
     const handleUpdate = (e) => {
@@ -74,42 +70,42 @@ const UpdateProfile = () => {
                 <h2>Update Profile here</h2>
                 <div>
                     Name: 
-                    <input onChange={(e) => setName(e.target.value)} type='text' name="name" placeholder='Name'></input>
+                    <input value={name} onChange={(e) => setName(e.target.value)} type='text' name="name" placeholder='Name'></input>
                 </div>
                 <br/>
                 <div>
                     Email: 
-                    <input onChange={(e) => setEmail(e.target.value)} type='text' name="email" placeholder='New Email'></input>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} type='text' name="email" placeholder='New Email'></input>
                 </div>
                 <br/>
                 <div>
                     About: 
-                    <input className='about-input' onChange={(e) => setAbout(e.target.value)} type='text' name="about" placeholder='Write about yourself!'></input>
+                    <input value={about} className='about-input' onChange={(e) => setAbout(e.target.value)} type='text' name="about" placeholder='Write about yourself!'></input>
                 </div>
                 <br/>
                 <div>
                     City: 
-                    <input onChange={(e) => setCity(e.target.value)} type='text' name="city" placeholder='City'></input>
+                    <input value={city} onChange={(e) => setCity(e.target.value)} type='text' name="city" placeholder='City'></input>
                 </div>
                 <br/>
                 <div>
-                    dob: 
-                    <input onChange={(e) => setDOB(e.target.value)} type='text' name="dob" placeholder='Date of birth'></input>
+                    Date Of Birth: 
+                    <input value={dob} onChange={(e) => setDOB(e.target.value)} type='text' name="dob" placeholder='Date of birth'></input>
                 </div>
                 <br/>
                 <div>
-                    address: 
-                    <input onChange={(e) => setAddress(e.target.value)} type='text' name="address" placeholder='Full Address'></input>
+                    Full Address: 
+                    <input value={address} onChange={(e) => setAddress(e.target.value)} type='text' name="address" placeholder='Full Address'></input>
                 </div>
                 <br/>
                 <div>
-                    country: 
-                    <input onChange={(e) => setCountry(e.target.value)} type='text' name="country" placeholder='Country'></input>
+                    Country: 
+                    <input value={country} onChange={(e) => setCountry(e.target.value)} type='text' name="country" placeholder='Country'></input>
                 </div>
                 <br/>
                 <div>
                     Phone Number: 
-                    <input onChange={(e) => setPhone(e.target.value)} type='text' name="phone_no" placeholder='Phone Number'></input>
+                    <input value={phone_no} onChange={(e) => setPhone(e.target.value)} type='text' name="phone_no" placeholder='Phone Number'></input>
                 </div>
                 <br/>
                 <button onClick={handleUpdate}>Update Profile</button>

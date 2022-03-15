@@ -46,7 +46,7 @@ class MainNav extends Component {
         // }
 
         return(
-            <div>
+            <div className='nav'>
                 {/* {redirectVar} */}
                 <img className='logo-center' src="/Etsy_logo.png" alt="Etsy Nav logo" width={50} height={25} style={{marginRight:50}}></img>
                 <Link to="/" className="btn btn-primary" style={{marginRight:50}} >Home</Link>
@@ -54,6 +54,7 @@ class MainNav extends Component {
                 <button onClick={this.handleSearchSubmit} style={{marginRight:50}}>Search</button>
                 <Link to="/favorites" className="btn btn-primary" style={{marginRight:50}}>Favorites Page</Link>
                 <Link to="/profile" className="btn btn-primary" style={{marginRight:50}}>User Profile</Link>
+                <Link to="/shop" className="btn btn-primary" style={{marginRight:50}}>Shop Page</Link>
                 <Link to="/cart" className="btn btn-primary">Cart</Link>
 
             </div>

@@ -9,6 +9,7 @@ var Item = function(item){
     this.price = item.price;
     this.quantity = item.quantity;
     this.fav = item.fav;
+    this.image = item.image;
 }
 
 
@@ -76,8 +77,8 @@ Item.getItemByShopID = (shop, result) => {
 // Update Item
 Item.updateItem = (item_ID, itemData, result) => {
 
-    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=? WHERE item_ID=?' , 
-    [itemData.name, itemData.category, itemData.description, itemData.price, itemData.quantity, itemData.fav, item_ID], 
+    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=?, image=? WHERE item_ID=?' , 
+    [itemData.name, itemData.category, itemData.description, itemData.price, itemData.quantity, itemData.fav, itemData.image, item_ID], 
     (err, res) => {
         if(err){
             console.log(err);
@@ -125,5 +126,6 @@ Item.updateItemFav = (item_ID, itemData, result) => {
 }
 
 
+// UPDATE IMAGE
 
 module.exports = Item;
