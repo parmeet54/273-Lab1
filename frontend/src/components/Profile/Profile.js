@@ -2,14 +2,12 @@ import React , {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import ShopPopup from '../Shop/ShopPopup';
 import { Navigate } from 'react-router';
 
 const Profile = () => {
     const[username, setUsername] = useState("");
     const[name, setName] = useState("");
     const[email, setEmail] = useState("");
-    const[seen, setSeen] = useState(false);
     const[user, setUser] = useState({});
 
 
@@ -32,10 +30,6 @@ const Profile = () => {
     const handleSearchSubmit = () => {
 
     }
-
-    // const handlePopup = () => {
-    //     setSeen(!seen);
-    // }
 
     return(
         <><div className='App'>

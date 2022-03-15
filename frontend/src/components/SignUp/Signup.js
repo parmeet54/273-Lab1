@@ -11,6 +11,7 @@ class Signup extends Component {
             email: "",
             password: "",
             name: "",
+            image:"default.jpeg",
             created:false,
             message: ""
         }

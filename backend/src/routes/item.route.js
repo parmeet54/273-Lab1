@@ -13,6 +13,9 @@ router.get("/:item_ID", itemController.getItemByID);
 // Get Item by Shop
 router.get("/byshop/:shop", itemController.getItemByShopID);
 
+// Get Item by NAME
+router.get("/searchItem/:name", itemController.getItemByName);
+
 // Create an Item
 router.post("/", itemController.createItem);
 

@@ -2,6 +2,10 @@ import React , {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import ItemList from '../Item/ItemList';
+import { CContainer, CCol, CRow } from '@coreui/react';
+
+import ItemPopup from './ItemPopup';
 
 const ShopPage = (props) => {
     const[name, setName] = useState("");
@@ -10,7 +14,7 @@ const ShopPage = (props) => {
     const[items, setItems] = useState([]);
     const[username, setUsername] = useState("");
     const[valid, setValid] = useState(false);
-
+    const[seen, setSeen] = useState(false);
 
     useEffect(() => {
 
@@ -89,25 +93,49 @@ const ShopPage = (props) => {
 
     }
 
+    const handleItemPopup = () => {
+        setSeen(!seen);
+        console.log("Pressed:" , seen);
+    }
+
+     // const handlePopup = () => {
+    //     setSeen(!seen);
+    // }
 
     const handleAddItem = () => {
         
     }
-    // //iterate over books to create a table row
-    // let details = items.map(item => {
+
+    let details = items.map(item => {
+        return(
+            <tr>
+                <td>{item.item_ID}</td>
+                <td>{item.name}</td>
+                <td>{item.category}</td>
+                <td>{item.description}</td>
+                <td>{item.quantity}</td>
+            </tr>
+        )
+    })
+
+    // let itemss = items.map(item => {
     //     return(
     //         <tr>
-    //             <td>{item.item_ID}</td>
     //             <td>{item.name}</td>
-    //             <td>{item.description}</td>
-    //             <td>{item.quantity}</td>
+    //             <td>{item.image}</td>
+    //             <td>{item.price}</td>
     //         </tr>
     //     )
     // })
 
 
     return(
+
         <div className='App'>
+
+
+            {seen ? <ItemPopup shop={shop_ID} toggle={handleItemPopup} /> : null}
+
             <br />My Shop ID is <b>{shop_ID}</b>
             <br />My Shop Name is <b>{name}</b>
             <br />My Username Name is <b>{username}</b>
@@ -117,11 +145,12 @@ const ShopPage = (props) => {
             <br />
             Shop Items:
             <br />
-            {/* <table className='table-center'>
+            <table className='table-center'>
                 <thead>
                     <tr>
                         <th>Item ID</th>
                         <th>Item Name</th>
+                        <th>Category</th>
                         <th>Item Description</th>
                         <th>Item Quantity</th>
                     </tr>
@@ -129,8 +158,24 @@ const ShopPage = (props) => {
                 <tbody>
                     {details}
                 </tbody>
-            </table> */}
+            </table>
+            <br/>
+            <br/>
 
+            <button onClick={handleItemPopup}>Add Item</button>
+            <br/>
+            <br/>
+            {valid ? 
+            
+                <CContainer>
+                <CRow xs={{ cols: 5 }}>
+                    <ItemList items={items}/>
+                </CRow>
+                </CContainer>
+            
+            : 
+            
+            <p></p>}
             {/* {{valid ? items.map(({ item_ID, name, description, quantity }) => (
                 <p key={item_ID}>Item name: {name},Description {description}, Quantity: {quantity}.</p>
             )) : <p>NO ITEMS in this Shop</p>}} */}
@@ -141,8 +186,6 @@ const ShopPage = (props) => {
 }
 
 export default ShopPage;
-
-
 
 
 // import React , {Component} from 'react';

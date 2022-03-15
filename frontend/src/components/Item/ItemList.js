@@ -1,9 +1,25 @@
 import { React, Component } from "react"
 import Item from "./Item";
+import {CCol, CRow,CContainer} from '@coreui/react'
 
 class ItemList extends Component {
     renderTile = (current_item) => {
-        return <Item item={current_item}></Item>
+
+        return (
+
+            <CCol>
+                <Item item={current_item}/>
+            </CCol>
+            
+            // <CContainer>
+            // <CRow xs={{ cols: 4, gutter: 2 }}>
+            //   <CCol sm="auto">One of three columns</CCol>
+            //   <CCol sm="auto">One of three columns</CCol>
+            //   <CCol sm="auto">One of three columns</CCol>
+            // </CRow>
+            // </CContainer>
+            // <Item item={current_item}/>
+        )
     }
 
     render() {
@@ -14,5 +30,9 @@ class ItemList extends Component {
         }
         return tiles;    }
 }
+
+ItemList.defaultProps = {
+    items: []
+  };
 
 export default ItemList;

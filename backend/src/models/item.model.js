@@ -74,6 +74,22 @@ Item.getItemByShopID = (shop, result) => {
 }
 
 
+// Get Item by NAME
+Item.getItemByName = (name, result) => {
+
+    db.query('SELECT * FROM item WHERE name = ?', name , (err,res) => {
+        if(err){
+            console.log("Error while fetching Item data", err);
+            result(null, err);
+        }
+        else{
+            console.log("Item Fetched");
+            result(null , res);
+        }
+    })
+}
+
+
 // Update Item
 Item.updateItem = (item_ID, itemData, result) => {
 

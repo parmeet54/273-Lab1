@@ -1,6 +1,9 @@
 import React , {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Item from '../Item/Item';
+import ItemList from '../Item/ItemList';
+import { CContainer, CRow } from '@coreui/react';
 
 const Homepage = () => {
     const[username, setUsername] = useState("");
@@ -8,6 +11,39 @@ const Homepage = () => {
     const[email, setEmail] = useState("");
     const[user, setUser] = useState({});
 
+    const item = {
+        name:"Test",
+        image:"default.jpeg",
+        price:100
+    }
+
+    const items = [
+        {
+            name:"Headphones",
+            image:"headphones.jpeg",
+            price:100
+        },
+        {
+            name:"Test",
+            image:"default.jpeg",
+            price:100
+        },
+        {
+            name:"Watch",
+            image:"watch.jpeg",
+            price:100
+        },
+        {
+            name:"Bottle",
+            image:"bottle.png",
+            price:100
+        },{
+            name:"Camera",
+            image:"camera.webp",
+            price:100
+        }
+
+    ]
 
     // useEffect(() => {
     //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
@@ -35,7 +71,17 @@ const Homepage = () => {
             <br/>  
 
             Hello, {sessionStorage.getItem("token")}
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            {/* <Item item={item}/> */}
 
+            <CContainer>
+                <CRow xs={{ cols: 5 }}>
+                    <ItemList items={items}/>
+                </CRow>
+            </CContainer>
         </div>
     )
 }

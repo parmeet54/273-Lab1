@@ -81,6 +81,29 @@ exports.getItemByShopID = (req, res) => {
 }
 
 
+// Get ITEM by NAME
+exports.getItemByName = (req, res) => {
+    console.log("Inside ITEM Controller: Get ITEM by NAME");
+
+    itemModel.getItemByName(req.params.name ,(err, result) => {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        if(result.length == 0)
+        {
+            console.log("No Such Item exists");
+            res.send("No such Item exists");
+        }
+        else{
+            console.log(result);
+            res.send(result);
+        }
+    })
+}
+
+
+
 
 // Update ITEM
 exports.updateItem = (req, res) => {

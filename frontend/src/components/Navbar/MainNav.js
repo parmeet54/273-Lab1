@@ -3,6 +3,9 @@ import { Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import {Navbar, Nav, Container, Form, FormControl, Button, NavDropdown} from 'react-bootstrap';
 
+import { CNavbar, CContainer, CNavbarBrand, CCollapse, CNavbarNav, CNavItem, CNavLink,
+    CDropdown, CDropdownToggle, CDropdownItem, CDropdownMenu, CDropdownDivider, CForm, CFormInput, CButton } from '@coreui/react/';
+
 
 class MainNav extends Component {
     constructor(props){

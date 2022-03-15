@@ -10,6 +10,7 @@ import Cart from './Cart/Cart';
 import ShopPage from './Shop/ShopPage';
 import CreateShop from './Shop/CreateShop';
 import axios from 'axios';
+import ItemList from './Item/ItemList';
 
 class Main extends Component {
 
