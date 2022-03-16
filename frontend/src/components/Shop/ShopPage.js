@@ -77,7 +77,9 @@ const ShopPage = (props) => {
             let response = axios.get("http://localhost:3001/api/v1/items/byshop/" + props.shop)
             response = await response;
             setItems(response.data);
-            setValid(true);
+            // if(items.length > 0){
+            //     setValid(true);
+            // }
 
             console.log("Items for Store " + props.shop + " fetched");
             console.log(response);
@@ -106,33 +108,28 @@ const ShopPage = (props) => {
         
     }
 
-    let details = items.map(item => {
-        return(
-            <tr>
-                <td>{item.item_ID}</td>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>{item.description}</td>
-                <td>{item.quantity}</td>
-            </tr>
-        )
-    })
-
-    // let itemss = items.map(item => {
-    //     return(
-    //         <tr>
-    //             <td>{item.name}</td>
-    //             <td>{item.image}</td>
-    //             <td>{item.price}</td>
-    //         </tr>
-    //     )
-    // })
-
+    let details = []
+    if(items.length > 0){
+        details = items.map(item => {
+            return(
+                <tr>
+                    <td>{item.item_ID}</td>
+                    <td>{item.name}</td>
+                    <td>{item.category}</td>
+                    <td>{item.description}</td>
+                    <td>{item.quantity}</td>
+                </tr>
+            )
+        })
+    }
 
     return(
 
+        
+
         <div className='App'>
 
+            {/* {items.length> 0 ? setValid(true): setValid(false)} */}
 
             {seen ? <ItemPopup shop={shop_ID} toggle={handleItemPopup} /> : null}
 
@@ -145,6 +142,7 @@ const ShopPage = (props) => {
             <br />
             Shop Items:
             <br />
+            {items.length > 0 ? 
             <table className='table-center'>
                 <thead>
                     <tr>
@@ -156,26 +154,28 @@ const ShopPage = (props) => {
                     </tr>
                 </thead>
                 <tbody>
+                    {/* {items.length > 0 ? {details}  : ""} */}
                     {details}
                 </tbody>
             </table>
+            : ""}
             <br/>
             <br/>
 
             <button onClick={handleItemPopup}>Add Item</button>
             <br/>
             <br/>
-            {valid ? 
+            {items.length > 0 ? 
             
                 <CContainer>
-                <CRow xs={{ cols: 5 }}>
-                    <ItemList items={items}/>
+                <CRow xs={{ cols: 4 }}>
+                    <ItemList type={"shop"} items={items}/>
                 </CRow>
                 </CContainer>
             
             : 
             
-            <p></p>}
+            <p>No Items in this shop yet. Add new items</p>}
             {/* {{valid ? items.map(({ item_ID, name, description, quantity }) => (
                 <p key={item_ID}>Item name: {name},Description {description}, Quantity: {quantity}.</p>
             )) : <p>NO ITEMS in this Shop</p>}} */}

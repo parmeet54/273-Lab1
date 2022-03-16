@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, Router} from 'react-router-dom';
 import Signup from './SignUp/Signup';
 import Login from './Login/Login';
 import MainNav from './Navbar/MainNav';
@@ -9,8 +9,9 @@ import Homepage from './HomePage/Homepage';
 import Cart from './Cart/Cart';
 import ShopPage from './Shop/ShopPage';
 import CreateShop from './Shop/CreateShop';
+import ItemPage from './Item/ItemPage';
 import axios from 'axios';
-import ItemList from './Item/ItemList';
+import SearchPage from './SearchPage/SearchPage';
 
 class Main extends Component {
 
@@ -32,8 +33,10 @@ class Main extends Component {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<ShopPage shop={shop}   />} />
                 <Route path="/createShop" element={<CreateShop/>}/>
+                <Route path="/search/:query" element={<SearchPage/>}/>
 
-            </Routes></>
+            </Routes>
+            </>
             
         )
     }

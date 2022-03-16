@@ -71,7 +71,7 @@ exports.getItemByShopID = (req, res) => {
         if(result.length == 0)
         {
             console.log("No Such Item exists");
-            res.send("No such Item exists");
+            res.send("");
         }
         else{
             console.log(result);
@@ -93,7 +93,7 @@ exports.getItemByName = (req, res) => {
         if(result.length == 0)
         {
             console.log("No Such Item exists");
-            res.send("No such Item exists");
+            res.send("");
         }
         else{
             console.log(result);

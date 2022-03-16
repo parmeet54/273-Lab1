@@ -77,7 +77,7 @@ Item.getItemByShopID = (shop, result) => {
 // Get Item by NAME
 Item.getItemByName = (name, result) => {
 
-    db.query('SELECT * FROM item WHERE name = ?', name , (err,res) => {
+    db.query('SELECT * FROM item WHERE INSTR(name , ?) > 0', name , (err,res) => {
         if(err){
             console.log("Error while fetching Item data", err);
             result(null, err);

@@ -6,19 +6,10 @@ class ItemList extends Component {
     renderTile = (current_item) => {
 
         return (
-
-            <CCol>
-                <Item item={current_item}/>
-            </CCol>
             
-            // <CContainer>
-            // <CRow xs={{ cols: 4, gutter: 2 }}>
-            //   <CCol sm="auto">One of three columns</CCol>
-            //   <CCol sm="auto">One of three columns</CCol>
-            //   <CCol sm="auto">One of three columns</CCol>
-            // </CRow>
-            // </CContainer>
-            // <Item item={current_item}/>
+            <CCol>
+                <Item type={this.props.type} item={current_item}/>
+            </CCol>
         )
     }
 

@@ -10,40 +10,56 @@ const Homepage = () => {
     const[name, setName] = useState("TEST");
     const[email, setEmail] = useState("");
     const[user, setUser] = useState({});
+    const[items, setItems] = useState([])
 
-    const item = {
-        name:"Test",
-        image:"default.jpeg",
-        price:100
-    }
+    // const item = {
+    //     name:"Test",
+    //     image:"default.jpeg",
+    //     price:100
+    // }
 
-    const items = [
-        {
-            name:"Headphones",
-            image:"headphones.jpeg",
-            price:100
-        },
-        {
-            name:"Test",
-            image:"default.jpeg",
-            price:100
-        },
-        {
-            name:"Watch",
-            image:"watch.jpeg",
-            price:100
-        },
-        {
-            name:"Bottle",
-            image:"bottle.png",
-            price:100
-        },{
-            name:"Camera",
-            image:"camera.webp",
-            price:100
+    useEffect(() => {
+        async function getItems() {
+
+            let response = axios.get("http://localhost:3001/api/v1/items/")
+            response = await response;
+            setItems(response.data);
+            // if(items.length > 0){
+            //     setValid(true);
+            // }
+            console.log(response);
         }
+        getItems();
+    },[setItems]);
 
-    ]
+
+    // const items = [
+    //     {
+    //         name:"Headphones",
+    //         image:"headphones.jpeg",
+    //         price:100
+    //     },
+    //     {
+    //         name:"Test",
+    //         image:"default.jpeg",
+    //         price:100
+    //     },
+    //     {
+    //         name:"Watch",
+    //         image:"watch.jpeg",
+    //         price:100
+    //     },
+    //     {
+    //         name:"Bottle",
+    //         image:"bottle.png",
+    //         price:100
+    //     },{
+    //         name:"Camera",
+    //         image:"camera.webp",
+    //         price:100
+    //     }
+
+    // ]
 
     // useEffect(() => {
     //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
