@@ -33,34 +33,6 @@ const Homepage = () => {
     },[setItems]);
 
 
-    // const items = [
-    //     {
-    //         name:"Headphones",
-    //         image:"headphones.jpeg",
-    //         price:100
-    //     },
-    //     {
-    //         name:"Test",
-    //         image:"default.jpeg",
-    //         price:100
-    //     },
-    //     {
-    //         name:"Watch",
-    //         image:"watch.jpeg",
-    //         price:100
-    //     },
-    //     {
-    //         name:"Bottle",
-    //         image:"bottle.png",
-    //         price:100
-    //     },{
-    //         name:"Camera",
-    //         image:"camera.webp",
-    //         price:100
-    //     }
-
-    // ]
-
     // useEffect(() => {
     //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
     //     .then((response) => {
@@ -79,16 +51,10 @@ const Homepage = () => {
     return(
         <div className='App'>
             <br/>
-            <br/>               
-            HOME PAGE
+            <br/>             
+            <h1>Welcome to Etsy</h1>
 
             <br/>  
-            <br/>  
-            <br/>  
-
-            Hello, {sessionStorage.getItem("token")}
-            <br/>
-            <br/>
             <br/>
             <br/>
             {/* <Item item={item}/> */}

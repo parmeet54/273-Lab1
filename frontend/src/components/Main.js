@@ -30,7 +30,7 @@ class Main extends Component {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/updateprofile" element={<UpdateProfile />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/shop" element={<ShopPage shop={shop}   />} />
+                <Route path="/shop/" element={<ShopPage shop={shop}   />} />
                 <Route path="/createShop" element={<CreateShop/>}/>
                 <Route path="/search/:query" element={<SearchPage/>}/>
                 <Route path="/item/:id" element={<ItemPage/>}/>
