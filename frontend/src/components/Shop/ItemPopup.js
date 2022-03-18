@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Navigate } from "react-router";
 
 export default class ItemPopup extends Component {
 
@@ -15,7 +14,7 @@ export default class ItemPopup extends Component {
           description:"",
           price: "",
           quantity:"",
-          fav:"",
+          fav:0,
           created: false
       }
 

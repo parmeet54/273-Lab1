@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Navigate } from "react-router";
 
 export default class ItemEditPopup extends Component {
 
@@ -8,14 +7,14 @@ export default class ItemEditPopup extends Component {
       super(props);
       
       this.state = {
-          item_ID:this.props.item_ID,
-          name: this.props.name,
-          image:this.props.image,
-          category:this.props.category,
-          description:this.props.description,
-          price: this.props.price,
-          quantity:this.props.quantity,
-          fav:this.props.fav,
+          item_ID:this.props.item.item_ID,
+          name: this.props.item.name,
+          image:this.props.item.image,
+          category:this.props.item.category,
+          description:this.props.item.description,
+          price: this.props.item.price,
+          quantity:this.props.item.quantity,
+          fav:this.props.item.fav,
           edited: false
       }
 

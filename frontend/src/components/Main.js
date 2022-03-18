@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {Route, Routes, Router} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Signup from './SignUp/Signup';
 import Login from './Login/Login';
 import MainNav from './Navbar/MainNav';
@@ -9,16 +9,15 @@ import Homepage from './HomePage/Homepage';
 import Cart from './Cart/Cart';
 import ShopPage from './Shop/ShopPage';
 import CreateShop from './Shop/CreateShop';
-import ItemPage from './Item/ItemPage';
-import axios from 'axios';
 import SearchPage from './SearchPage/SearchPage';
+import ItemPage from './Item/ItemPage';
 
 class Main extends Component {
 
     render(){
 
         const shop = sessionStorage.getItem("shop");
-        const user = sessionStorage.getItem("token");
+        // const user = sessionStorage.getItem("token");
 
         return(
             <><div>
@@ -34,6 +33,7 @@ class Main extends Component {
                 <Route path="/shop" element={<ShopPage shop={shop}   />} />
                 <Route path="/createShop" element={<CreateShop/>}/>
                 <Route path="/search/:query" element={<SearchPage/>}/>
+                <Route path="/item/:id" element={<ItemPage/>}/>
 
             </Routes>
             </>
