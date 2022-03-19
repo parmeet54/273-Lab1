@@ -11,6 +11,7 @@ import ShopPage from './Shop/ShopPage';
 import CreateShop from './Shop/CreateShop';
 import SearchPage from './SearchPage/SearchPage';
 import ItemPage from './Item/ItemPage';
+import OrderPage from './OrderPage/OrderPage'
 
 class Main extends Component {
 
@@ -32,6 +33,7 @@ class Main extends Component {
                 <Route path="/createShop" element={<CreateShop/>}/>
                 <Route path="/search/:query" element={<SearchPage/>}/>
                 <Route path="/item/:id" element={<ItemPage/>}/>
+                <Route path="/orders" element={<OrderPage/>}/>
 
             </Routes>
             </>

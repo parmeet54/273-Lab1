@@ -28,7 +28,7 @@ exports.createItem = (req,res) => {
             res.send(err);
         }
         if(result.status == true){
-            console.log("Inside ITEM CONTROLLER: CART ITEM Created");
+            console.log("Inside CART CONTROLLER: CART ITEM Created");
             res.send(result);
         }
         else res.send("ITEM Already exists");

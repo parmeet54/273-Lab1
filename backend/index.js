@@ -14,6 +14,7 @@ const userRoutes = require('./src/routes/user.route');
 const shopRoutes = require('./src/routes/shop.route');
 const itemRoutes = require('./src/routes/item.route');
 const cartRoutes = require('./src/routes/cart.route');
+const orderRoutes = require('./src/routes/order.route');
 
 app.set('view engine', 'ejs');
 
@@ -85,6 +86,10 @@ app.use("/api/v1/items", itemRoutes);
 
 // Item Routes
 app.use("/api/v1/cart", cartRoutes);
+
+// Order Routes
+app.use("/api/v1/orders", orderRoutes);
+
 
 // Login function
 app.post('/api/v1/login', async (req,res) => {

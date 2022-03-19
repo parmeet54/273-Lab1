@@ -48,7 +48,9 @@ const Profile = () => {
             <br />
             <br />
             <Link to="/updateProfile" state={{ user: user }} className="btn btn-primary">Update Profile</Link>
-            
+
+            <Link to="/orders" style={{marginLeft:100}} className="btn btn-primary">View My Orders</Link>
+
             {sessionStorage.getItem("shop") ? 
                 ""
             :

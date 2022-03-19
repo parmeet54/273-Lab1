@@ -7,6 +7,7 @@ var Cart = function(cart){
     this.name = cart.name;
     this.shop = cart.shop;
     this.quantity = cart.quantity;
+    this.stock = cart.stock;
     this.price = cart.price;
     this.username = cart.username;
 }

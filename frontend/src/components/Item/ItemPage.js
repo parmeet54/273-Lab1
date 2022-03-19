@@ -13,11 +13,10 @@ const ItemPage = (props) => {
     const[sales, setSales]= useState(0);
     const {id} = useParams();
     const navigate = useNavigate();
-    let[counter, setCounter] = useState(0);
+    let[counter, setCounter] = useState(1);
 
 
     useEffect(() => {
-
 
         async function getItem(){
  
@@ -101,8 +100,9 @@ const ItemPage = (props) => {
             cart_item_ID:id,
             image:item.image,
             name:item.name,
-            shop:item.shop,
+            shop:item.shopname,
             quantity:counter,
+            stock:item.quantity,
             price:item.price*counter,
             username:sessionStorage.getItem("token")
         }
@@ -115,21 +115,21 @@ const ItemPage = (props) => {
         })
 
 
-        handleQuantityChange()
+        // handleQuantityChange()
         navigate("/cart/");
 
     }
 
     const handleQuantityChange = () => {
 
-        const data = {
-            quantity:item.quantity - counter
-        }
+        // const data = {
+        //     quantity:item.quantity - counter
+        // }
 
-        axios.put("http://localhost:3001/api/v1/items/stock/"+item.item_ID , data)
-        .then(response => {
-            console.log(response);
-        })
+        // axios.put("http://localhost:3001/api/v1/items/stock/"+item.item_ID , data)
+        // .then(response => {
+        //     console.log(response);
+        // })
     }
 
     return(
@@ -176,7 +176,7 @@ const ItemPage = (props) => {
                     <br /><br />
                     {item.quantity > 0      ?
 
-                        <><CButton variant='outline' onClick={handleMinus}>-</CButton><b>{counter}</b><CButton variant='outline' onClick={handlePlus}>+</CButton></>
+                        <><CButton variant='outline' onClick={handleMinus}>-</CButton><b>   {counter}   </b><CButton variant='outline' onClick={handlePlus}>+</CButton></>
 
                     : ""}
 
