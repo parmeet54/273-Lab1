@@ -1,40 +1,62 @@
 import React , {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import ItemList from '../Item/ItemList';
+import { CTable, CTableHead, CTableRow,CTableHeaderCell, CTableBody, CTableDataCell } from '@coreui/react';
+import FavItems from '../Profile/FavItems';
 
 const Cart = () => {
-    const[username, setUsername] = useState("");
-    const[name, setName] = useState("TEST");
-    const[email, setEmail] = useState("");
-    const[user, setUser] = useState({});
+    const[cartItems,setCartItems] = useState([]);
 
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
-    //     .then((response) => {
-    //         //setUser(response.data[0]);
-    //         setUsername(response.data[0].username);
-    //         setName(response.data[0].name);
-    //         setEmail(response.data[0].email);
-    //         //console.log(response.data[0]);
-    //     });
-    //     console.log("Username:", username);
-    // });
+    useEffect(() => {
+        axios.get("http://localhost:3001/api/v1/cart/byuser/" + sessionStorage.getItem("token"))
+        .then((response) => {
+           setCartItems(response.data)
+
+        });
+    },[]);
+
+    const handleCheckout = () => {
+        
+    }
 
 
     console.log("\n Inside Cart Page")
 
     return(
         <div className='App'>
+
+            {console.log(cartItems)}
+
             <br/>
             <br/>               
-            CART PAGE
+            
+            <h1>Your Cart</h1>
+  
+            <br/>  
 
-            <br/>  
-            <br/>  
-            <br/>  
-
-            Items in your cart will appear here
+            <CTable>
+            <CTableHead color="light">
+                <CTableRow>
+                <CTableHeaderCell scope="col">Image</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Item Name</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Quantity</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Price</CTableHeaderCell>
+                </CTableRow>
+            </CTableHead>
+            <CTableBody>
+                {cartItems.map(({ image, name, quantity, price }) => (
+                   
+                   <CTableRow>
+                   <CTableHeaderCell scope="row"><img src={image} width={100}/></CTableHeaderCell>
+                   <CTableDataCell>{name}</CTableDataCell>
+                   <CTableDataCell>{quantity}</CTableDataCell>
+                   <CTableDataCell>{localStorage.getItem("currency")}{price}</CTableDataCell>
+                   </CTableRow>
+                
+                ))}
+            </CTableBody>
+            </CTable>
         </div>
     )
 }

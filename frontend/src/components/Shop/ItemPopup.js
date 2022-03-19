@@ -20,6 +20,7 @@ export default class ItemPopup extends Component {
 
       this.handleClick = this.handleClick.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.uploadImage = this.uploadImage.bind(this);
   } 
 
   // Handles the pop up toggle
@@ -33,10 +34,27 @@ export default class ItemPopup extends Component {
     });
   }
 
-  handleImageChange = (e) => {
+  uploadImage = async e=> {
+    const files = e.target.files
+    const data = new FormData
+    data.append('file', files[0])
+    data.append('upload_preset', '273-images')
+
+    const res = await fetch(
+        'http://api.cloudinary.com/v1_1/ddpcbqqmh/image/upload', 
+        {
+            method: 'POST',
+            body: data
+        }
+    )
+
+    const file = await res.json()
+
     this.setState({
-        image: e.target.value
-    });
+      image:file.secure_url
+    })
+
+    console.log(file.secure_url)
   }
 
   handleCategoryChange = (e) => {
@@ -65,11 +83,12 @@ export default class ItemPopup extends Component {
 
   handleSubmit = () => {
 
-    var theRandomNumber = Math.floor(Math.random() * 999) + 1;
+    var theRandomNumber = Math.floor(Math.random() * 99999) + 1;
 
     const data= {
         item_ID:theRandomNumber,
         shop: this.props.shop,
+        shopname:this.props.shopname,
         name: this.state.name,
         image: this.state.image,
         category:this.state.category,
@@ -118,7 +137,7 @@ export default class ItemPopup extends Component {
             <br />
             <label>
               Image:
-              <input onChange={this.handleImageChange} type="text" name="image" placeholder="Item Image"/>
+              <input onChange={this.uploadImage} type="file" name="image" placeholder="Item Image"/>
             </label>
             <br />
             <label>

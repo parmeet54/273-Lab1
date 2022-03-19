@@ -22,5 +22,7 @@ router.put("/:shop_ID", shopController.updateShop);
 // Update Shop Sales
 router.put("/sales/:shop_ID", shopController.updateShopSales);
 
+// Update Shop Image
+router.put("/shopimage/:shop_ID", shopController.updateShopImage);
 
 module.exports = router;

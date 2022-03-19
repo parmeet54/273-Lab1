@@ -24,18 +24,67 @@ const MainNav = () => {
         navigate("/search/"+query);
         window.location.reload(false);
     }
+
+    const handleUserShopNav = () => {
+        navigate("/shop/"+sessionStorage.getItem("shop"));
+    }
     
     return(
-        <div className='nav'>
-            {/* {redirectVar} */}
-            <img className='logo-center' src="/Etsy_logo.png" alt="Etsy Nav logo" width={50} height={25} style={{marginRight:50}}></img>
+        <div>
+            <>
+                <CNavbar expand="lg" colorScheme="light" className="bg-light">
+                <CContainer breakpoint="md">
+                    <CNavbarBrand href="/"> <img className='logo-center' src="/Etsy_logo.png" alt="Etsy Nav logo" width={50} height={25} style={{marginRight:50}}></img> </CNavbarBrand>
+                    <CNavbarNav>
+                        <CNavItem>
+                        <CNavLink href="/" active style={{marginRight:50}}>
+                            Home
+                        </CNavLink>
+                        </CNavItem>
+                    </CNavbarNav>
+                    <CForm className="d-flex">
+                        {/* <CFormInput onChange={handleSearchChange} type="search" className="me-2" placeholder="Search Any Item" width={2000} /> */}
+                        <input onChange={handleSearchChange} type='search bar' name="search" placeholder='Search Any Item'></input>
+                        <CButton onClick={handleSearchSubmit} type="submit" color="success" variant="outline" style={{marginRight:50}}>
+                        Search
+                        </CButton>
+                    </CForm>
+                    <CNavbarNav>
+                        <CNavItem>
+                        <CNavLink href="/profile" active style={{marginRight:50}}>
+                        Favorites
+                        </CNavLink>
+                        </CNavItem>
+                        <CNavItem>
+                        <CNavLink href="/profile" active style={{marginRight:50}}>
+                        Profile
+                        </CNavLink>
+                        </CNavItem>
+                        <CNavItem>
+                        <CNavLink onClick={handleUserShopNav} active style={{marginRight:50}}>
+                        My Shop
+                        </CNavLink>
+                        </CNavItem>
+                        <CNavItem>
+                        <CNavLink href="/cart" active>
+                        Cart
+                        </CNavLink>
+                        </CNavItem>
+                    </CNavbarNav>
+                </CContainer>
+                </CNavbar>
+            </>
+
+            {/* <img className='logo-center' src="/Etsy_logo.png" alt="Etsy Nav logo" width={50} height={25} style={{marginRight:50}}></img>
             <Link to="/" className="btn btn-primary" style={{marginRight:50}} >Home</Link>
             <input onChange={handleSearchChange} type='search bar' name="search" placeholder='Search Any Item'></input>
             <button onClick={handleSearchSubmit} type="submit" style={{marginRight:50}}>Search</button>
             <Link to="/profile" className="btn btn-primary" style={{marginRight:50}}>Favorites</Link>
             <Link to="/profile" className="btn btn-primary" style={{marginRight:50}}>User Profile</Link>
-            <Link to="/shop" className="btn btn-primary" style={{marginRight:50}}>Shop Page</Link>
-            <Link to="/cart" className="btn btn-primary">Cart</Link>
+            <Link to="/shop/" className="btn btn-primary" style={{marginRight:50}}>Shop Page</Link>
+            <button onClick={handleUserShopNav}>My Shop</button>
+            <Link to="/cart" className="btn btn-primary">Cart</Link> */}
+
 
         </div>
 
@@ -43,34 +92,7 @@ const MainNav = () => {
 }
 
             
-//     <Navbar bg="light" expand="lg">
-//     <Container fluid>
-//       <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-//       <Navbar.Toggle aria-controls="navbarScroll" />
-//       <Navbar.Collapse id="navbarScroll">
-//         <Nav
-//           className="me-auto my-2 my-lg-0"
-//           style={{ maxHeight: '100px' }}
-//           navbarScroll
-//         >
-//           <Nav.Link href="#action1">Home</Nav.Link>
-//           <Nav.Link href="#action2">Link</Nav.Link>
-//           <Nav.Link href="#" disabled>
-//             Link
-//           </Nav.Link>
-//         </Nav>
-//         <Form className="d-flex">
-//           <FormControl
-//             type="search"
-//             placeholder="Search"
-//             className="me-2"
-//             aria-label="Search"
-//           />
-//           <Button variant="outline-success">Search</Button>
-//         </Form>
-//       </Navbar.Collapse>
-//     </Container>
-//   </Navbar>
+    
 
 
 export default MainNav;

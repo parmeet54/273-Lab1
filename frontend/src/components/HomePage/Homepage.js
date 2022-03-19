@@ -3,48 +3,36 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Item from '../Item/Item';
 import ItemList from '../Item/ItemList';
-import { CContainer, CRow } from '@coreui/react';
+import { CContainer, CRow, CFooter } from '@coreui/react';
 
 const Homepage = () => {
-    const[username, setUsername] = useState("");
-    const[name, setName] = useState("TEST");
-    const[email, setEmail] = useState("");
-    const[user, setUser] = useState({});
+
     const[items, setItems] = useState([])
 
-    // const item = {
-    //     name:"Test",
-    //     image:"default.jpeg",
-    //     price:100
-    // }
+    const userShop = sessionStorage.getItem("shop");
 
+    const[currency,setCurrency] = useState(localStorage.getItem("currency"));
+    const[country,setCountry] = useState(localStorage.getItem("country"));
+  
     useEffect(() => {
         async function getItems() {
 
             let response = axios.get("http://localhost:3001/api/v1/items/")
             response = await response;
-            setItems(response.data);
-            // if(items.length > 0){
-            //     setValid(true);
-            // }
-            console.log(response);
+
+            setItems(response.data.filter(item =>item.shop != userShop))
         }
         getItems();
     },[setItems]);
 
+    const handleCurrencyChange = (e) => {
+        setCurrency(e.target.value);
+        localStorage.setItem("currency" , e.target.value);
+    }
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:3001/api/v1/users/" + localStorage.getItem("token"))
-    //     .then((response) => {
-    //         //setUser(response.data[0]);
-    //         setUsername(response.data[0].username);
-    //         setName(response.data[0].name);
-    //         setEmail(response.data[0].email);
-    //         //console.log(response.data[0]);
-    //     });
-    //     console.log("Username:", username);
-    // });
-
+    const handleCountryChange = (e) => {
+        localStorage.setItem("country" , e.target.value);
+    }
 
     console.log("\n Inside Home Page")
 
@@ -57,13 +45,41 @@ const Homepage = () => {
             <br/>  
             <br/>
             <br/>
-            {/* <Item item={item}/> */}
 
             <CContainer>
                 <CRow xs={{ cols: 5 }}>
                     <ItemList items={items}/>
                 </CRow>
             </CContainer>
+
+            <CFooter>
+            <div>
+                Etsy Clone
+                <span> 2022 ParmeetSingh</span>
+            </div>
+            <div>
+                Select Country: 
+                <select value={country} onChange={handleCountryChange}>
+                    <option value="japan">Japan</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United Kingdom">Europe</option>
+                    <option value="United States">United States</option>
+                    <option value="India">India</option>
+                </select>
+            </div>
+            
+            <div>
+                <span>Select Currency</span>
+                <select value={currency} onChange={handleCurrencyChange}>
+                    <option value="₹">Rupee (₹)</option>
+                    <option value="£">Pound (£)</option>
+                    <option value="¥">Euro (€)</option>
+                    <option value="$">U.S. Dollar ($)</option>
+                    <option value="¥">Yen (¥)</option>
+                </select>
+            </div>
+            </CFooter>
+
         </div>
     )
 }

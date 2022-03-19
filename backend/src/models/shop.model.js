@@ -107,6 +107,20 @@ Shop.updateShopSales = (shop_ID, shopReqData, result) => {
 
 
 // UPDATE IMAGE
+Shop.updateShopImage = async(shop_ID, shopReqData, result) => {
 
+    db.query('UPDATE shop SET image = ? WHERE shop_ID=?', 
+    [shopReqData.image,  shop_ID], 
+    (err, res) => {
+        if(err){
+            console.log('Error while updating Shop image', err);
+            result(null, err);
+        }
+        else{
+            console.log("Shop image  updated successfully");
+            result(null, {status: true, message:"Shop image udated"});
+        }
+    })
+}
 
 module.exports = Shop;

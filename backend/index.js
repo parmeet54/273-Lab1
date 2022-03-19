@@ -13,6 +13,7 @@ const bcrypt = require('bcrypt');
 const userRoutes = require('./src/routes/user.route');
 const shopRoutes = require('./src/routes/shop.route');
 const itemRoutes = require('./src/routes/item.route');
+const cartRoutes = require('./src/routes/cart.route');
 
 app.set('view engine', 'ejs');
 
@@ -82,6 +83,9 @@ app.use("/api/v1/shops", shopRoutes);
 // Item Routes
 app.use("/api/v1/items", itemRoutes);
 
+// Item Routes
+app.use("/api/v1/cart", cartRoutes);
+
 // Login function
 app.post('/api/v1/login', async (req,res) => {
     const username = req.body.username;
@@ -115,7 +119,7 @@ app.post('/api/v1/login', async (req,res) => {
 
 
 // User logout function
-app.get('/logout', (req,res) => {
+app.get('/api/v1/logout', (req,res) => {
     if(!req.session.user){
         console.log("\nNot logged in");
         res.send("Not Logged In");

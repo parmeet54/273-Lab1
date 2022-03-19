@@ -1,6 +1,5 @@
 import React , {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router';
@@ -14,6 +13,7 @@ const ItemPage = (props) => {
     const[sales, setSales]= useState(0);
     const {id} = useParams();
     const navigate = useNavigate();
+    let[counter, setCounter] = useState(0);
 
 
     useEffect(() => {
@@ -52,8 +52,6 @@ const ItemPage = (props) => {
     })
 
 
-    
-
     const handleFavorite = () => {
 
         const data = {
@@ -83,15 +81,55 @@ const ItemPage = (props) => {
     }
 
     const onNavigateShopPage = () => {
-        navigate("/shop/" + item.item_ID);
+        navigate("/shop/" + item.shop);
+    }
+
+    const handlePlus = () => {
+        if(counter <= item.quantity)
+        setCounter(counter++)
+    }
+
+    const handleMinus = () => {
+        if(counter > 0)
+        setCounter(counter--)
     }
 
     const handleAddToCart = (e) => {
+
+
+        const cartData = {
+            cart_item_ID:id,
+            image:item.image,
+            name:item.name,
+            shop:item.shop,
+            quantity:counter,
+            price:item.price*counter,
+            username:sessionStorage.getItem("token")
+        }
+
+        axios.post("http://localhost:3001/api/v1/cart/" , cartData)
+        .then(response => {
+            console.log(response);
+            console.log("Item Added to cart");
+            console.log(cartData);
+        })
+
+
+        handleQuantityChange()
+        navigate("/cart/");
 
     }
 
     const handleQuantityChange = () => {
 
+        const data = {
+            quantity:item.quantity - counter
+        }
+
+        axios.put("http://localhost:3001/api/v1/items/stock/"+item.item_ID , data)
+        .then(response => {
+            console.log(response);
+        })
     }
 
     return(
@@ -129,41 +167,35 @@ const ItemPage = (props) => {
                     <br /><br />
                     Description: <b>{item.description}</b>
 
-
-                    <br /><br />
-                    Item Shop <b>{item.shop}</b>
-
                     <br /><br />
                     Price <b>{localStorage.getItem("currency") + item.price}</b>
 
                     <br /><br />
-                    Stock: <b>{item.quantity}</b>
+                    Stock: <b>{item.quantity > 0 ? item.quantity : "Out of Stock"}</b>
 
                     <br /><br />
-                    <CButton color='secondary' >Add to Cart</CButton>
+                    {item.quantity > 0      ?
+
+                        <><CButton variant='outline' onClick={handleMinus}>-</CButton><b>{counter}</b><CButton variant='outline' onClick={handlePlus}>+</CButton></>
+
+                    : ""}
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    {item.quantity > 0      ?
+                    
+                        <CButton onClick={handleAddToCart} color='success' variant='outline' >Add to Cart: {localStorage.getItem("currency")}{item.price*counter}</CButton>
+
+                    :
+                    
+                    ""}
                     
                 </CCol>
             </CRow>
-
-                
             </CContainer>
 
-         
-
-           
-
-            <br />
-            {/* <br /><Link to="/updateProfile" className="btn btn-primary">Update Profile</Link>
-
-        
-            <div className='App'>
-                <br/>
-                <br/>
-                <br/>
-                <Link to="/createshop" className="btn btn-primary">Create Shop</Link>
-            </div> */}
-
-            
         </div>
        </>
     )

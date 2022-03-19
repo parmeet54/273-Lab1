@@ -106,6 +106,7 @@ exports.updateShopSales = (req, res) => {
     const shopReqData= new shopModel(req.body);
     shopModel.updateShopSales(req.params.shop_ID, shopReqData, (err,result) => {
         if(err)
+        console.log(err)
         res.send(err);
 
         console.log( result)
@@ -113,3 +114,28 @@ exports.updateShopSales = (req, res) => {
     })
     console.log("Request Data", req.body);
 }
+
+// Update Shop Image
+exports.updateShopImage = (req, res) => {
+
+    console.log("Inside Shop Controller: Update Shop Image");
+    const shopReqData= new shopModel(req.body);
+    shopModel.updateShopImage(req.params.shop_ID, shopReqData, (err,result) => {
+        if(err){
+            res.send(err);
+        }
+        if(result){
+            console.log(result)
+            res.send(result)
+        }
+        else{
+            console.log(err)
+            res.send(err);
+        }
+
+        
+    })
+    console.log("Request Data", req.body);
+}
+
+

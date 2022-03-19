@@ -20,6 +20,7 @@ export default class ItemEditPopup extends Component {
 
       this.handleClick = this.handleClick.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.uploadImage = this.uploadImage.bind(this);
   } 
 
   // Handles the pop up toggle
@@ -31,6 +32,30 @@ export default class ItemEditPopup extends Component {
     this.setState({
         name: e.target.value
     });
+  }
+
+  uploadImage = async e=> {
+    const files = e.target.files
+    const data = new FormData
+    data.append('file', files[0])
+    data.append('upload_preset', '273-images')
+
+    const res = await fetch(
+        'http://api.cloudinary.com/v1_1/ddpcbqqmh/image/upload', 
+        {
+            method: 'POST',
+            body: data
+        }
+    )
+
+    const file = await res.json()
+
+    this.setState({
+      image:file.secure_url
+    })
+    //setImage(file.secure_url)
+
+    console.log(file.secure_url)
   }
 
   handleImageChange = (e) => {
@@ -114,7 +139,7 @@ export default class ItemEditPopup extends Component {
             <br />
             <label>
               Image:
-              <input value={this.state.image} onChange={this.handleImageChange} type="text" name="image" placeholder="Item Image"/>
+              <input onChange={this.uploadImage} type="file" name="image" placeholder="Item Image"/>
             </label>
             <br />
             <label>

@@ -13,8 +13,6 @@ function Item(props) {
     const navigate = useNavigate();
     const[unFav, setUnfav] = useState("");
  
-    localStorage.setItem("currency", "$");
-
     useEffect( () => {
         //props.item.fav = props.item.fav;
 
@@ -26,10 +24,8 @@ function Item(props) {
             setFav(false);
             //setFav(false);
         }
-
     })
 
-        
     const handleFavorite = () => {
 
         const data = {
@@ -80,7 +76,7 @@ function Item(props) {
                 <CCardTitle>{props.item.name}</CCardTitle>
 
                 <br/>
-                <CCardText>Stock:{props.item.quantity}</CCardText>          
+                <CCardText>Stock:{props.item.quantity > 0 ? props.item.quantity : "Out of Stock"}</CCardText>          
                 <CCardText>{localStorage.getItem("currency")}{props.item.price}</CCardText>
                 
                 {/* <CButton color='light' onClick={onNavigateItemPage} href="/item">Item Page</CButton> */}
