@@ -28,5 +28,8 @@ router.put("/stock/:item_ID", itemController.updateItemQuantity);
 // Update Item Fav
 router.put("/fav/:item_ID", itemController.updateItemFav);
 
+// Delete Item
+router.delete("/:item_ID", itemController.deleteItem);
+
 
 module.exports = router;

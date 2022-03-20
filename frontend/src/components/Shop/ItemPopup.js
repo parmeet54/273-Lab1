@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { CFormInput, CFormLabel,CFormCheck, CButton } from "@coreui/react";
+
 
 export default class ItemPopup extends Component {
 
@@ -9,7 +11,7 @@ export default class ItemPopup extends Component {
       this.state = {
           item_ID:"",
           name: "",
-          image:"",
+          image:"/default-item.png",
           category:"",
           description:"",
           price: "",
@@ -88,7 +90,7 @@ export default class ItemPopup extends Component {
     const data= {
         item_ID:theRandomNumber,
         shop: this.props.shop,
-        shopname:this.props.shopname,
+        shopname:this.props.name,
         name: this.state.name,
         image: this.state.image,
         category:this.state.category,
@@ -130,38 +132,44 @@ export default class ItemPopup extends Component {
           <form onSubmit={this.handleSubmit}>
             <h3>Add an Item!</h3>
             <h3>Enter the information for the Item</h3>
-            <label>
+            <CFormLabel>
               Name:
-              <input onChange={this.handleNameChange} type="text" name="name" placeholder="Item Name"/>
-            </label>
+              <CFormInput onChange={this.handleNameChange} type="text" name="name" placeholder="Item Name"/>
+            </CFormLabel>
             <br />
-            <label>
+            <CFormLabel>
               Image:
-              <input onChange={this.uploadImage} type="file" name="image" placeholder="Item Image"/>
-            </label>
+              <CFormInput onChange={this.uploadImage} type="file" name="image" placeholder="Item Image"/>
+            </CFormLabel>
             <br />
-            <label>
-              Category:
-              <input onChange={this.handleCategoryChange} type="text" name="category" placeholder="Item Category"/>
-            </label>
+            <CFormLabel>
+              Category:  
+              <CFormCheck onClick={this.handleCategoryChange} inline type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="Clothing" label="Clothing"/>
+              <CFormCheck onClick={this.handleCategoryChange} inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="Jewelry" label="Jewelry"/>
+              <CFormCheck onClick={this.handleCategoryChange} inline type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="option3" label="Entertainment"/>
+              <CFormCheck onClick={this.handleCategoryChange} inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="Home Decor" label="Home Decor"/>
+              <CFormCheck onClick={this.handleCategoryChange} inline type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="Art" label="Art"/>
+
+              <CFormInput onChange={this.handleCategoryChange} type="text" name="category" placeholder="Create your own category"/>
+            </CFormLabel>
             <br />
-            <label>
+            <CFormLabel>
               Description:
-              <input onChange={this.handleDescriptionChange} className='item-description-input' type="text" name="description" placeholder="Enter Description "/>
-            </label>
+              <CFormInput onChange={this.handleDescriptionChange} className='item-description-input' type="text" name="description" placeholder="Enter Description "/>
+            </CFormLabel>
             <br />
-            <label>
+            <CFormLabel>
               Price:
-              <input onChange={this.handlePriceChange} type="text" name="price" placeholder="Enter Price"/>
-            </label>
+              <CFormInput onChange={this.handlePriceChange} type="text" name="price" placeholder="Enter Price"/>
+            </CFormLabel>
             <br />
-            <label>
+            <CFormLabel>
               Quantity:
-              <input onChange={this.handleQuantityChange} type="text" name="quantity" placeholder="Total Quantity"/>
-            </label>
+              <CFormInput onChange={this.handleQuantityChange} type="text" name="quantity" placeholder="Total Quantity"/>
+            </CFormLabel>
             <br />
             <br />
-            <input type="submit" />
+            <CButton type="submit">Add Item</CButton>
           </form>
         </div>
       </div>

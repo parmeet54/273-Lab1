@@ -12,17 +12,23 @@ import CreateShop from './Shop/CreateShop';
 import SearchPage from './SearchPage/SearchPage';
 import ItemPage from './Item/ItemPage';
 import OrderPage from './OrderPage/OrderPage'
+import axios from 'axios';
 
 class Main extends Component {
 
     render(){
-
+        if(sessionStorage.getItem("currency") == null){
+            sessionStorage.setItem("currency", "$")
+        }
         return(
             <><div>
                 <MainNav />
             </div>
+            
             <Routes>
-                <Route path="/" element={<Homepage />} />
+
+
+                <Route path="/" element={<Homepage />}/>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
@@ -34,6 +40,18 @@ class Main extends Component {
                 <Route path="/search/:query" element={<SearchPage/>}/>
                 <Route path="/item/:id" element={<ItemPage/>}/>
                 <Route path="/orders" element={<OrderPage/>}/>
+
+                {/* <Route path="/" element={<Homepage />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/updateprofile" element={<UpdateProfile />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/shop/:id" element={<ShopPage />} />
+                <Route path="/createShop" element={<CreateShop/>}/>
+                <Route path="/search/:query" element={<SearchPage/>}/>
+                <Route path="/item/:id" element={<ItemPage/>}/>
+                <Route path="/orders" element={<OrderPage/>}/> */}
 
             </Routes>
             </>

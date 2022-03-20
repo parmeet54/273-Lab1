@@ -63,6 +63,11 @@ function Item(props) {
         //console.log("Pressed:" , seen);
     }
 
+    const handleDeleteItem = () => {
+        axios.delete("http://localhost:3001/api/v1/items/"+ props.item.item_ID);
+        window.location.reload(false);
+
+    }
 
     return (
         
@@ -96,7 +101,11 @@ function Item(props) {
                 <br/> 
                 <br/>
 
-                {props.type === "shop" ?   <CButton color='warning' shape='rounded-pill' onClick={handleItemPopup}>Edit Item</CButton>  :  ""}
+                {props.type === "shop" ?  
+                
+                <><CButton color='warning' shape='rounded-pill' onClick={handleItemPopup}>Edit Item</CButton><CButton style={{marginLeft:10}} color='danger' shape='rounded-pill' onClick={handleDeleteItem}>Delete Item</CButton></>  
+
+                :  ""}
                 
             </CCardBody>
             </CCard>

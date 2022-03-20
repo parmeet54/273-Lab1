@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { Navigate } from 'react-router';
 import FavItems from './FavItems';
+import { CContainer, CRow, CCol, CButton } from '@coreui/react';
 
 const Profile = () => {
     const[username, setUsername] = useState("");
@@ -12,6 +13,8 @@ const Profile = () => {
     const[image,setImage] = useState("");
     const[user, setUser] = useState({});
     const[favItems,setFavItems] = useState([]);
+    const userShop = sessionStorage.getItem("shop")
+    const[hasShop, setHasShop] = useState(false);
  
 
     useEffect(() => {
@@ -31,6 +34,10 @@ const Profile = () => {
             setFavItems(response.data.filter(item =>item.fav === "1"));
         })
 
+        if(userShop != "undefined"){
+            setHasShop(true);
+        }
+
     },[]);
 
     
@@ -38,8 +45,56 @@ const Profile = () => {
         <><div className='App'>
             {/* {seen ? <ShopPopup name="TESTING" toggle={handlePopup} /> : null} */}
 
-            <img src={image} width={300}/>
-            <br />User Profile here, Hello <b>{name}</b>
+            <br/><br/>
+
+            <CContainer>
+                <CRow>
+                <CCol > <img src={image} width={300}/></CCol>
+               
+                <CCol>
+                    <br/>
+
+                    <br /><h1><b>{name}</b></h1>
+
+                    <br />My Email: <b>{email}</b>
+
+                    <br />My Username: <b>{username}</b>
+
+                    <br />
+                    <br />
+                    <Link to="/updateProfile" state={{ user: user }} className="btn btn-primary">Update Profile</Link>
+
+
+                </CCol>
+                <CCol>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <Link to="/orders"  className="btn btn-primary">View My Orders</Link>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    {hasShop  ? 
+
+                        ""
+                    :
+
+                        <Link to="/createshop"  className="btn btn-primary">Create Shop</Link>
+                    }
+
+                    
+                </CCol>
+
+
+                </CRow>
+            </CContainer>
+            
+
+            
+            {/* <br />User Profile here, Hello <b>{name}</b>
 
             <br />My Email is <b>{email}</b>
 
@@ -51,12 +106,13 @@ const Profile = () => {
 
             <Link to="/orders" style={{marginLeft:100}} className="btn btn-primary">View My Orders</Link>
 
-            {sessionStorage.getItem("shop") ? 
+            {hasShop  ? 
+
                 ""
             :
 
                 <Link to="/createshop"  className="btn btn-primary">Create Shop</Link>
-            }
+            } */}
 
             <br/>
             <br/>

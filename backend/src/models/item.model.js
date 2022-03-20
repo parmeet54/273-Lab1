@@ -94,7 +94,7 @@ Item.getItemByName = (name, result) => {
 // Update Item
 Item.updateItem = (item_ID, itemData, result) => {
 
-    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=?, image=? WHERE item_ID=?' , 
+    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=?, image=?, WHERE item_ID=?' , 
     [itemData.name, itemData.category, itemData.description, itemData.price, itemData.quantity, itemData.fav, itemData.image, itemData.shopname, item_ID], 
     (err, res) => {
         if(err){
@@ -143,6 +143,19 @@ Item.updateItemFav = (item_ID, itemData, result) => {
 }
 
 
-// UPDATE IMAGE
+// Delete Item
+Item.deleteItem = (item_ID, result) => {
+
+    db.query("DELETE FROM item WHERE item_ID = ?", item_ID, (err,res) => {
+        if(err){
+            console.log(err)
+            result(null, err);
+        }
+        else{
+            result(null, {status: true , message:"Item Deleted"});
+        }
+    })
+}
+
 
 module.exports = Item;

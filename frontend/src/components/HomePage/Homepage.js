@@ -9,7 +9,7 @@ const Homepage = () => {
 
     const[items, setItems] = useState([])
 
-    const userShop = sessionStorage.getItem("shop");
+    //const userShop = sessionStorage.getItem("shop");
 
     const[currency,setCurrency] = useState(localStorage.getItem("currency"));
     const[country,setCountry] = useState(localStorage.getItem("country"));
@@ -17,10 +17,13 @@ const Homepage = () => {
     useEffect(() => {
         async function getItems() {
 
+            let shop = axios.get("http://localhost:3001/api/v1/shops/usershop/"+sessionStorage.getItem("token"));
+            shop = await shop;
+
             let response = axios.get("http://localhost:3001/api/v1/items/")
             response = await response;
 
-            setItems(response.data.filter(item =>item.shop != userShop))
+            setItems(response.data.filter(item =>item.shop != shop.data[0].shop_ID))
         }
         getItems();
     },[setItems]);

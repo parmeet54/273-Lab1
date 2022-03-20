@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import ItemList from '../Item/ItemList';
-import { CContainer, CRow } from '@coreui/react';
 import { useParams } from 'react-router';
 import ItemPopup from './ItemPopup';
+import { CContainer,CCol,CRow, CButton } from '@coreui/react';
 
 const ShopPage = (props) => {
     const[name, setName] = useState("");
@@ -110,63 +110,81 @@ const ShopPage = (props) => {
 
     return(
 
-        <div className='App'>
+        <div>
+            <div className='App'>
+                {seen ? <ItemPopup shop={shop_ID} name={name} toggle={handleItemPopup} /> : null}
+            </div>
+        
+
+        <br/><br/>
+
+        <CContainer>
+            <CRow>
+            <CCol > 
+                <img src={image} width={300}/>
+                <br/>
+                <p>   </p>
+                <CButton color='dark' style={{marginRight:10 , marginLeft:50}} onClick={handleClick}>Edit Image</CButton>
+                <CButton color='dark' onClick={updateImage}>Update</CButton>
+                
+                <input type="file" ref={hiddenFileInput} onChange={uploadImage} style={{display:'none'}} />
+            
+            </CCol>
+        
+            <CCol>
+
+                <br/>
+                <br /><h1><b>{name}</b></h1>
+                by: <b>{username}</b>
+                <br />
+                <br/>{userShop ? <h3> Total Sales: {total_sales} </h3> : "" }
+
+
+            </CCol>
+            <CCol>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+            </CCol>
+
+
+            </CRow>
+            </CContainer>
+
 
             {/* {items.length> 0 ? setValid(true): setValid(false)} */}
+            <div className='App'>
+                <h2>Shop Items:</h2>
+                <br />
+                {userShop ? <CButton color='success' variant='outline' onClick={handleItemPopup}> <b>+</b> Add Item</CButton> : ""}
 
-            {seen ? <ItemPopup shop={shop_ID} toggle={handleItemPopup} /> : null}
+                <br/>
+                <br/>
+                {items.length > 0 ? 
 
-            <img src={image} width={300}/>
+                    <CContainer>
+                    <CRow xs={{ cols: 4 }}>
+                        {userShop ?     
+                            <ItemList type={"shop"} items={items}/>
+                            :
+                            <ItemList items={items}/>
+                        }
+                        {/* <ItemList type={"shop"} items={items}/> */}
+                    </CRow>
+                    </CContainer>
 
-            {/* <label>
-              Edit Shop Image:
-              <input onChange={uploadImage} type="file" name="image" placeholder="Item Image"/>
-            </label> */}
-            <Button onClick={handleClick}>
-                Edit Image
-            </Button>
-            <input type="file"
-                ref={hiddenFileInput}
-                onChange={uploadImage}
-                style={{display:'none'}} 
-            />
-            <Button onClick={updateImage}>Update</Button>
-            <br />My Shop ID is <b>{shop_ID}</b>
-            <br />My Shop Name is <b>{name}</b>
-            <br />My Username Name is <b>{username}</b>
-            <br />
-            
-            {userShop ? <h3> My Total Sales are {total_sales} </h3> : "" }
+                : 
+                        <><br /><br /><br /><br /><p>No Items in this shop yet. Add new items</p></>}
+                        {/* {{valid ? items.map(({ item_ID, name, description, quantity }) => (
+                            <p key={item_ID}>Item name: {name},Description {description}, Quantity: {quantity}.</p>
+                        )) : <p>NO ITEMS in this Shop</p>}} */} 
 
-            <br />
-            <br />
-            Shop Items:
-            <br />
-            <br/>
-            <br/>
-            {userShop ? <button onClick={handleItemPopup}>Add Item</button> : ""}
-            
-            <br/>
-            <br/>
-            {items.length > 0 ? 
-            
-                <CContainer>
-                <CRow xs={{ cols: 4 }}>
-                    {userShop ?     
-                        <ItemList type={"shop"} items={items}/>
-                        :
-                        <ItemList items={items}/>
-                    }
-                    {/* <ItemList type={"shop"} items={items}/> */}
-                </CRow>
-                </CContainer>
-            
-            : 
-            
-            <p>No Items in this shop yet. Add new items</p>}
-            {/* {{valid ? items.map(({ item_ID, name, description, quantity }) => (
-                <p key={item_ID}>Item name: {name},Description {description}, Quantity: {quantity}.</p>
-            )) : <p>NO ITEMS in this Shop</p>}} */}            
+            </div>
+
+                       
 
         </div>
     )

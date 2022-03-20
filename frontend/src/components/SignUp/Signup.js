@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
 import axios from 'axios';
 import {Navigate} from 'react-router';
+import { Link } from 'react-router-dom';
+import { CForm, CFormLabel, CFormInput, CCol, CButton, CRow, CContainer, CTabContent, CLink } from '@coreui/react';
 
 class Signup extends Component {
 
@@ -54,7 +56,8 @@ class Signup extends Component {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
-            name: this.state.name
+            name: this.state.name,
+            image:"/default.jpeg"
         }
         
         axios.post("http://localhost:3001/api/v1/users", data)
@@ -80,24 +83,52 @@ class Signup extends Component {
            redirectVar = <Navigate to= "/login"/>
         }
         return(
-            <div>
+            <><div className='App'>
                 {redirectVar}
-                <h2>Sign Up Here</h2>
-                <div>
-                    <input onChange={this.usernameChangeHandler} type='text' name="username" placeholder='username'></input>
-                </div>
-                <div>
-                    <input onChange={this.emailChangeHandler} type='text' name="email" placeholder='email'></input>
-                </div>
-                <div>
-                    <input onChange={this.passwordChangeHander} type='password' name="password" placeholder='password'></input>
-                </div>
-                <div>
-                    <input onChange={this.nameChangeHandler} type='text' name="name" placeholder='name'></input>
-                </div>
-
-                <button onClick={this.submitSignup}>Sign Up</button>
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
+            <CContainer className="mx-auto" >
+            
+            <h1>Sign Up <img className='logo-center' src="/Etsy_logo.png" alt="Etsy Nav logo" width={120} height={60} style={{marginRight:50}}></img> </h1>
+
+                <CRow style={{marginLeft:1000}} className="mb-3">
+                    <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</CFormLabel>
+                    <CCol xs="auto">
+                        <CFormInput onChange={this.usernameChangeHandler} type="text" id="username" />
+                    </CCol>
+                </CRow>
+                <CRow className="mb-3">
+                    <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">Name</CFormLabel>
+                    <CCol xs="auto">
+                        <CFormInput onChange={this.nameChangeHandler} type="text" id="name" />
+                    </CCol>
+                </CRow>
+                <CRow className="mb-3">
+                    <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</CFormLabel>
+                    <CCol xs="auto">
+                        <CFormInput onChange={this.emailChangeHandler} type="email" id="email" />
+                    </CCol>
+                </CRow>
+                <CRow className="mb-3">
+                    <CFormLabel htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</CFormLabel>
+                    <CCol xs="auto">
+                        <CFormInput onChange={this.passwordChangeHander} type="password" id="password" />
+                    </CCol>
+                </CRow>
+                <CButton style={{width:420}} onClick={this.submitSignup} type="submit">Sign Up</CButton>
+                <br/>
+                <br/>
+                <Link to="/login">Have an account? Login Here</Link>
+
+            </CContainer>
+
+                
+            </>
+
+                
         );
     }
 }

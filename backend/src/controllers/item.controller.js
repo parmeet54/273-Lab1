@@ -154,4 +154,16 @@ exports.updateItemFav = (req, res) => {
 }
 
 
+// delete Item by ID
+exports.deleteItem = (req, res) => {
+    itemModel.deleteItem(req.params.item_ID, (err, user) =>{
+        if(err)
+        res.send(err);
+
+        res.json({success: true, message: "Items Deleted"});
+    });
+}
+
+
+
 
