@@ -1,4 +1,14 @@
+const mysql = require('mysql')
 const db = require('../../config/db.config');
+
+
+// const pool = mysql.createPool({
+//     connectionLimit : 500,
+//     user:'admin',
+//     host:'db-273-lab1.cnhf2ck6mcsk.us-west-1.rds.amazonaws.com',
+//     password:'273lab1db',
+//     database:'lab1'
+// })
 
 // Encryption
 const bcrypt = require('bcrypt');
@@ -20,6 +30,17 @@ var User = function(user){
 
 
 User.getAllUsers = (result) =>{
+    
+    // pool.query('SELECT * FROM user WHERE username = "admin" ', (err,res) =>{
+    //     if(err){
+    //         console.log("Error while getting users: ", err);
+    //         result(null, err);
+    //     }
+    //     else{
+    //         result(null, res);
+    //     }
+    // })
+    
     db.query('SELECT * FROM user', (err,res) =>{
         if(err){
             console.log("Error while getting users: ", err);

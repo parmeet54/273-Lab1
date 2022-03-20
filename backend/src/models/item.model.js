@@ -94,8 +94,8 @@ Item.getItemByName = (name, result) => {
 // Update Item
 Item.updateItem = (item_ID, itemData, result) => {
 
-    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=?, image=?, WHERE item_ID=?' , 
-    [itemData.name, itemData.category, itemData.description, itemData.price, itemData.quantity, itemData.fav, itemData.image, itemData.shopname, item_ID], 
+    db.query('UPDATE item SET name=?, category=?, description=?, price=?, quantity=?, fav=?, image=? WHERE item_ID=?' , 
+    [itemData.name, itemData.category, itemData.description, itemData.price, itemData.quantity, itemData.fav, itemData.image, item_ID], 
     (err, res) => {
         if(err){
             console.log(err);

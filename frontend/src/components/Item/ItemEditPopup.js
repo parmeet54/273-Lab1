@@ -100,13 +100,14 @@ export default class ItemEditPopup extends Component {
         fav:this.state.fav
 
     }
-    axios.put("http://localhost:3001/api/v1/items/"+this.props.item.item_ID , data)
+    axios.put("http://localhost:3001/api/v1/items/"+this.state.item_ID , data)
     .then(response => {
         console.log(response);
         if(response.status === 200){
             this.setState({
                 edited:true
             })
+            console.log(this.state.item_ID)
         }
         else{
             console.log(response);

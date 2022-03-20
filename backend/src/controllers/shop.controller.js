@@ -18,7 +18,7 @@ exports.getAllShops = (req,res) => {
 
 // Create a Shop
 exports.createShop = (req,res) => {
-    console.log("\nCREATE SHOP");
+    console.log("\nInside SHOP Controller: CREATE SHOP");
 
     const shopData = new shopModel(req.body);
     shopModel.createShop(shopData, (err, result) => {
@@ -39,7 +39,7 @@ exports.createShop = (req,res) => {
 
 // Get SHOP by SHOP_ID
 exports.getShopByID = (req, res) => {
-    console.log("Inside SHOP Controller: Get SHOP");
+    console.log("\nInside SHOP Controller: Get SHOP By USER");
 
     shopModel.getShopByID(req.params.shop_ID ,(err, result) => {
         if(err){

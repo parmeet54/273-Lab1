@@ -10,31 +10,34 @@ const Cart = () => {
     const[hasItems, setHasItems] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/v1/cart/byuser/" + sessionStorage.getItem("token"))
-            .then((response) => {
-                if(response.data === 200){
-                    const items = response.data
-                    setCartItems(items);
-                    setHasItems(true);
-                    setTotal(items.reduce((a, v) => a + v.price, 0).toFixed(2));
-                }
+        // axios.get("http://localhost:3001/api/v1/cart/byuser/" + sessionStorage.getItem("token"))
+        //     .then((response) => {
+        //         if(response.data === 200){
+        //             const items = response.data
+        //             setCartItems(response.data);
+        //             console.log(response.data)
+        //             console.log(response.data)
+        //             setHasItems(true);
+        //             setTotal(items.reduce((a, v) => a + v.price, 0).toFixed(2));
+        //         }
             
             //cartItems.map(item  => total+item.price);
-            });
+            //});
         // cartItems.map(item  => total+item.price);
 
-        // async function getCart(){
-        //     let response = await axios.get("http://localhost:3001/api/v1/cart/byuser/" + sessionStorage.getItem("token"))
-        //     response = await response;
+        async function getCart(){
+            let response = await axios.get("http://localhost:3001/api/v1/cart/byuser/" + sessionStorage.getItem("token"))
+            response = await response;
     
-        //     setCartItems(response.data)
-        //     // await response.data.map(item => total = total + item.price);
-        //     await response.data.map(item => setTotal(total+item.price));
+            setCartItems(response.data)
+            // await response.data.map(item => total = total + item.price);
+            setTotal(response.data.reduce((a, v) => a + v.price, 0).toFixed(2));
+            // await response.data.map(item => setTotal(total+item.price));
 
-        //     console.log(total)
-        // }
+            console.log(total)
+        }
         
-        // getCart()
+        getCart()
 
 
     },[]);
@@ -45,6 +48,8 @@ const Cart = () => {
         const today = new Date().toString();
 
         cartItems.map(item => {
+
+            
 
             let randomID = Math.floor(Math.random() * 99999) + 1;
 
@@ -137,7 +142,7 @@ const Cart = () => {
             </CTableBody>
 
             </CTable> */}
-            {hasItems && cartItems.length > 0? 
+            {/* {hasItems && cartItems.length > 0?  */}
             
                 <><CTable>
                     <CTableHead color="light">
@@ -174,10 +179,10 @@ const Cart = () => {
 
                 </CTable><br /><br /><br /><br /><CButton size="lg" variant="outline" color='success' onClick={handleCheckout}>Checkout</CButton></>
             
-                :
+                {/* :
 
                     <><br /><br /><br /><br /><h2>No Items in your cart</h2></>
-            }
+            } */}
 
             
 

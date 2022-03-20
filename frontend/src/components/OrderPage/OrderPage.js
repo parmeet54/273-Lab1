@@ -47,33 +47,26 @@ const OrderPage = () => {
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
-                        {  orderItems.map(({ image, name, order_ID, shop, quantity, price, date_purc, total }) => (
-                            
-                            <CTableRow>
-                                <CTableHeaderCell align={'middle'} scope="row"><img src={image} width={100}/></CTableHeaderCell>
-                                <CTableDataCell align={'middle'}>{name}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{order_ID}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{shop}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{quantity}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{localStorage.getItem("currency")}{price}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{date_purc}</CTableDataCell>
-                                <CTableDataCell align={'middle'}>{total}</CTableDataCell>
-                            </CTableRow>
-                            ))
-                        }
+                    {  orderItems.map(({ image, name, order_ID, shop, quantity, price, date_purc, total }) => (
+                        
+                        <CTableRow>
+                            <CTableHeaderCell align={'middle'} scope="row"><img src={image} width={100}/></CTableHeaderCell>
+                            <CTableDataCell align={'middle'}>{name}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{order_ID}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{shop}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{quantity}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{localStorage.getItem("currency")}{price}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{date_purc}</CTableDataCell>
+                            <CTableDataCell align={'middle'}>{localStorage.getItem("currency")}{total}</CTableDataCell>
+                        </CTableRow>
+                        ))
+                    }
                     </CTableBody>
         
                     </CTable>
                 
                 
-                
-                
                 :
-                
-                
-                
-                
-                
                 
                 <h2>You have not made any orders. Items will appear here after you make any purchase(s).</h2>
                 
